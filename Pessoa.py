@@ -1,4 +1,9 @@
 from Pokemon import *;
+import random;
+
+NOMES = [
+        "John", "André", "Ash", "Gary", "Marcelo", "Patrícia", "Gustavo", "Lara", "Wilken"
+    ]
 
 class Pessoa:
     
@@ -6,7 +11,7 @@ class Pessoa:
         if nome:
             self.nome = nome;
         else:
-            self.nome = "Anônimo";
+            self.nome = random.choice(NOMES);
             
         self.pokemons = pokemons;
     
@@ -14,18 +19,29 @@ class Pessoa:
         return self.nome;
     
     def mostrarPokemons(self):
-        for pokemon in self.pokemons:
-            print(pokemon);
+        if (self.pokemons):
+            print("Pokemons de {}" .format(self));
+            for pokemon in self.pokemons:
+                print(pokemon);
+        else:
+            print("{} não possuí nenhum pokemon!" .format(self))
         
             
 class Player(Pessoa):
     tipo = "Player";
     
+    def capturarPokemon(self, pokemon):
+        self.pokemons.append(pokemon);
+        print("{} captutrou {} com sucesso!" .format(self, pokemon));
+    
 class Inimigo(Pessoa):
     tipo = "Inimigo";
     
+    
+    
 
 '''
+    Testes
 
 pokemon = PokemonEletrico("Pikachu");
 
@@ -35,4 +51,15 @@ eu = Player(nome="Bernardo", pokemons=[pokemon, pokemon2]);
 
 eu.mostrarPokemons();
 
+eu = Player();
+
+print(eu);
+
+pokemon_selvagem = PokemonFogo("Charmander")
+
+eu.capturarPokemon(pokemon_selvagem);
+
+eu.mostrarPokemons();
+
 '''
+
