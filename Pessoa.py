@@ -87,9 +87,7 @@ class Inimigo(Pessoa):
         else:
                 print("Esse jogador não possui nenhum pokemon para ser escolhido.")
         
-meuInimigo = Inimigo();
 
-meuInimigo.mostrarPokemons();
     
     
 
