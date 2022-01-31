@@ -37,6 +37,48 @@ class Pessoa:
             print("{} não possuí nenhum pokemon!" .format(self));
             
     def escolherPokemon(self):
+        if self.pokemons:
+            pokemon_escolhido = random.choice(self.pokemons)
+            print("{}: {}, eu escolho você!!!!" .format(self, pokemon_escolhido));
+            return pokemon_escolhido;
+        else:
+                print("Esse jogador não possui nenhum pokemon para ser escolhido.")
+            
+    def batalhar(self, pessoa):
+        print("{} iniciou uma batalha com {}" .format(self, pessoa));
+        
+        pessoa.mostrarPokemons();
+        pokemonInimigo = pessoa.escolherPokemon();
+        
+        pokemon = self.escolherPokemon();
+        
+        if pokemon and pokemonInimigo:
+            while True:
+                vitoria = pokemon.atacar(pokemonInimigo);
+                
+                if vitoria:
+                    print("{} ganhou a batalha" .format(self));
+                    break;
+                
+                vitoriaInimiga = pokemonInimigo.atacar(pokemon);
+                
+                if vitoriaInimiga:
+                    print("{} ganhou a batalha" .format(pessoa))
+                    break;
+                  
+        else:
+            print("[ERRO] Essa batalha não pode acontecer.")
+            
+        
+            
+class Player(Pessoa):
+    tipo = "Player";
+    
+    def capturarPokemon(self, pokemon):
+        self.pokemons.append(pokemon);
+        print("{} captutrou {} com sucesso!" .format(self, pokemon));
+        
+    def escolherPokemon(self):
         self.mostrarPokemons();
         
         while True:
@@ -53,21 +95,6 @@ class Pessoa:
             else:
                 print("Esse jogador não possui nenhum pokemon para ser escolhido.")
     
-    def batalhar(self, pessoa):
-        print("{} iniciou uma batalha com {}" .format(self, pessoa));
-        
-        pessoa.mostrarPokemons();
-        pessoa.escolherPokemon();
-        
-        self.escolherPokemon();
-        
-            
-class Player(Pessoa):
-    tipo = "Player";
-    
-    def capturarPokemon(self, pokemon):
-        self.pokemons.append(pokemon);
-        print("{} captutrou {} com sucesso!" .format(self, pokemon));
     
 class Inimigo(Pessoa):
     tipo = "Inimigo";
@@ -79,13 +106,6 @@ class Inimigo(Pessoa):
                 pokemons.append(random.choice(POKEMONS));
                        
         super().__init__(nome, pokemons);
-    
-    def escolherPokemon(self):
-        if self.pokemons:
-            pokemon_escolhido = random.choice(self.pokemons)
-            print("{}: {}, eu escolho você!!!!" .format(self, pokemon_escolhido));
-        else:
-                print("Esse jogador não possui nenhum pokemon para ser escolhido.")
         
 
     
