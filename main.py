@@ -29,10 +29,14 @@ def escolherPokemonInicial(player):
             print("Escolha Inválida.")
     
 player = Player("Bernardo");
+#player.mostrarDinheiro();
+#escolherPokemonInicial(player);
 
-escolherPokemonInicial(player);
-
-inimigo = Inimigo("Gary", pokemons=[PokemonAgua("Squirtle", level=1)]);
+#inimigo = Inimigo("Gary", pokemons=[PokemonAgua("Squirtle", level=1)]);
 
 
-player.batalhar(inimigo);
+#player.batalhar(inimigo);
+
+player.explorar();
+
+player.mostrarPokemons();

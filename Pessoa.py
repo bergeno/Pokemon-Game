@@ -17,13 +17,15 @@ POKEMONS = [
 
 class Pessoa:
     
-    def __init__(self, nome=None, pokemons=[]):
+    def __init__(self, nome=None, pokemons=[], dinheiro = 100):
         if nome:
             self.nome = nome;
         else:
             self.nome = random.choice(NOMES);
             
         self.pokemons = pokemons;
+        
+        self.dinheiro = dinheiro;
     
     def __str__(self) -> str:
         return self.nome;
@@ -42,7 +44,16 @@ class Pessoa:
             print("{}: {}, eu escolho você!!!!" .format(self, pokemon_escolhido));
             return pokemon_escolhido;
         else:
-                print("Esse jogador não possui nenhum pokemon para ser escolhido.")
+                print("Esse jogador não possui nenhum pokemon para ser escolhido.");
+                
+    def ganharDinheiro(self, quantidade):
+        self.dinheiro += quantidade;
+        print("Você ganhou $ {}" .format(quantidade));
+        self.mostrarDinheiro();
+        
+    def mostrarDinheiro(self):
+        print("Você possui $ {}".format(self.dinheiro))
+        
             
     def batalhar(self, pessoa):
         print("{} iniciou uma batalha com {}" .format(self, pessoa));
@@ -58,6 +69,7 @@ class Pessoa:
                 
                 if vitoria:
                     print("{} ganhou a batalha" .format(self));
+                    self.ganharDinheiro(pokemonInimigo.level * 100);
                     break;
                 
                 vitoriaInimiga = pokemonInimigo.atacar(pokemon);
@@ -93,8 +105,25 @@ class Player(Pessoa):
                 except:
                     print("Escolha Inválida.");
             else:
-                print("Esse jogador não possui nenhum pokemon para ser escolhido.")
-    
+                print("Esse jogador não possui nenhum pokemon para ser escolhido.");
+        
+    def explorar(self):
+        if random.random() <= 0.3:
+            pokemon = random.choice(POKEMONS);
+            print("Um pokemon selvagem apareceu: {}" .format(pokemon));
+            
+            escolha = input("Deseja tentar capturar esse pokemon? (s/n) ")
+            
+            if escolha == "s":
+                if random.random() >= 0.5:
+                    self.capturarPokemon(pokemon);
+                else:
+                    print("Esse pokemon fugiu.");
+            else:
+                print("Ok, boa viagem!");
+        else:
+            print("Essa exploração não deu em nada.");
+            return None;
     
 class Inimigo(Pessoa):
     tipo = "Inimigo";

@@ -1,7 +1,7 @@
 import random;
 
 class Pokemon:
-    def __init__(self, especie, level=1, nome=None):  
+    def __init__(self, especie, level=random.randint(1, 100), nome=None):  
         self.especie = especie;
         
         
@@ -22,8 +22,9 @@ class Pokemon:
         return "{}(Lvl {})" .format(self.especie, self.level);
     
     def atacar(self, pokemon):
-        pokemon.vida -= self.ataque; 
-        print("{} perdeu {} de vida." .format(pokemon, self.ataque));
+        ataqueEfetivo = int(self.ataque * random.random() * 1.3)
+        pokemon.vida -= ataqueEfetivo; 
+        print("{} perdeu {} de vida." .format(pokemon, ataqueEfetivo));
         
         if pokemon.vida <= 0:
             print("{} foi derrotado." .format(pokemon));
