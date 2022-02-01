@@ -1,5 +1,7 @@
+from time import sleep
 from Pokemon import *;
 import random;
+from termcolor import colored
 
 NOMES = [
         "John", "André", "Ash", "Gary", "Marcelo", "Patrícia", "Gustavo", "Lara", "Wilken"
@@ -32,7 +34,7 @@ class Pessoa:
     
     def mostrarPokemons(self):
         if (self.pokemons):
-            print("Pokemons de {}" .format(self));
+            print(colored("Pokemons de {}","yellow") .format(self));
             for index,pokemon in enumerate(self.pokemons):
                 print("{} - {}".format(index, pokemon));
         else:
@@ -66,17 +68,17 @@ class Pessoa:
         if pokemon and pokemonInimigo:
             while True:
                 vitoria = pokemon.atacar(pokemonInimigo);
-                
                 if vitoria:
                     print("{} ganhou a batalha" .format(self));
                     self.ganharDinheiro(pokemonInimigo.level * 100);
                     break;
-                
+                sleep(0.5);
                 vitoriaInimiga = pokemonInimigo.atacar(pokemon);
                 
                 if vitoriaInimiga:
                     print("{} ganhou a batalha" .format(pessoa))
                     break;
+                sleep(0.5);
                   
         else:
             print("[ERRO] Essa batalha não pode acontecer.")
@@ -100,7 +102,7 @@ class Player(Pessoa):
                 try:
                     escolha = int(escolha);
                     pokemon_escolhido = self.pokemons[escolha];
-                    print("{}: {}, eu escolho você!!!!" .format(self, pokemon_escolhido));
+                    print(colored("{}:", "blue").format(self), "{}, eu escolho você!!!!" .format(pokemon_escolhido));
                     return pokemon_escolhido;
                 except:
                     print("Escolha Inválida.");

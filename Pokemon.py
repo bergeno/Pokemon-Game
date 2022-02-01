@@ -1,11 +1,11 @@
 import random;
 
 class Pokemon:
-    def __init__(self, especie, level=random.randint(1, 100), nome=None):  
+    def __init__(self, especie, level=0, nome=None):  
         self.especie = especie;
         
         
-        if level:
+        if level != 0:
             self.level = level;
         else:
             self.level=random.randint(1, 100)
