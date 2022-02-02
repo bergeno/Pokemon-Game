@@ -1,7 +1,7 @@
 import random;
 
 class Pokemon:
-    def __init__(self, especie, level=0, nome=None):  
+    def __init__(self, especie, level=0, nome=None, ataque=None, vida=None):  
         self.especie = especie;
         
         
@@ -9,14 +9,18 @@ class Pokemon:
             self.level = level;
         else:
             self.level=random.randint(1, 100)
-        
+        if vida:
+            self.vida = vida;
+        else:
+            self.vida = self.level * 10;
+        if ataque:
+            self.ataque == ataque;
+        else:
+            self.ataque = self.level * 5;
         if nome:
             self.nome = nome;
         else:
             self.nome = especie;
-        
-        self.ataque = level * 5;
-        self.vida = level * 10;
         
     def __str__(self):
         return "{}(Lvl {})" .format(self.especie, self.level);
@@ -49,3 +53,8 @@ class PokemonAgua(Pokemon):
     def atacar(self, pokemon):
         print("{} lançou uma jato d'agua em {}" .format(self, pokemon));
         return super().atacar(pokemon);
+    
+
+pokemon = PokemonFogo("Charmander");
+
+print(pokemon.level, pokemon.ataque, pokemon.vida);
