@@ -32,6 +32,7 @@ class Pokemon:
         
         if pokemon.vida <= 0:
             print("{} foi derrotado." .format(pokemon));
+            self.vida = self.level * 10;
             return True;
         else:
             return False;
@@ -55,6 +56,3 @@ class PokemonAgua(Pokemon):
         return super().atacar(pokemon);
     
 
-pokemon = PokemonFogo("Charmander");
-
-print(pokemon.level, pokemon.ataque, pokemon.vida);
